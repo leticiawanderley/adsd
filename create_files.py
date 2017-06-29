@@ -21,7 +21,7 @@ def create_csv(dbFile, logFile, nameFile):
 		aServer = float(linesServer[lineServer+1].split(" ")[0])
 		resultServer = (aServer - bServer) * (10**-9)
 
-		if resultServer > 15:
+		while(resultServer > 15):
 
 			lineServer += 2
 			bServer = float(linesServer[lineServer].split(" ")[0])
