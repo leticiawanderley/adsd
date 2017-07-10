@@ -17,10 +17,10 @@ class Simulacao:
     def __init__(self, qtd_eventos):
         self.qtd_eventos = qtd_eventos
 
-    def chegada_fila_1(self):
+    def escalona_chegada_fila_1(self):
         self.proxima_chegada_1 = random.randint(1, 10) + self.momento
 
-    def chegada_fila_2(self):
+    def escalona_chegada_fila_2(self):
         self.proxima_chegada_2 = random.randint(1, 5) + self.momento
 
     def print_estado_sistema(self, tipo_evento):
@@ -33,8 +33,8 @@ class Simulacao:
         self.qtd_eventos = self.qtd_eventos - 1
 
     def run(self):
-        self.chegada_fila_1()
-        self.chegada_fila_2()
+        self.escalona_chegada_fila_1()
+        self.escalona_chegada_fila_2()
         while(self.qtd_eventos > 0):
             self.momento = self.momento + 1
             if self.termino == self.momento:
@@ -52,7 +52,7 @@ class Simulacao:
 
             if self.proxima_chegada_1 == self.momento:
                 self.print_estado_sistema("Chegada")
-                self.chegada_fila_1()
+                self.escalona_chegada_fila_1()
                 if self.servidor_livre:
                     self.servidor_livre = False
                     self.termino = random.randint(3, 7) + self.momento
@@ -60,7 +60,7 @@ class Simulacao:
                     self.fila_1.append('1')
             if self.proxima_chegada_2 == self.momento:
                 self.print_estado_sistema("Chegada")
-                self.chegada_fila_2()
+                self.escalona_chegada_fila_2()
                 if self.servidor_livre:
                     self.servidor_livre = False
                     self.termino = random.randint(3, 7) + self.momento
