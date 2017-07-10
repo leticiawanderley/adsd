@@ -42,7 +42,6 @@ class Simulacao:
         while(self.qtd_eventos > 0):
             self.momento = self.momento + 1
             if self.termino == self.momento:
-                self.print_estado_sistema("Saída")
                 if self.fila_1:
                     self.aloca_servidor()
                     self.fila_1.pop()
@@ -51,21 +50,22 @@ class Simulacao:
                     self.fila_2.pop()
                 else:
                     self.servidor_livre = True
+                self.print_estado_sistema("Saída")
 
             if self.proxima_chegada_1 == self.momento:
-                self.print_estado_sistema("Chegada")
                 self.escalona_chegada_fila_1()
                 if self.servidor_livre:
                     self.aloca_servidor()
                 else:
                     self.fila_1.append('1')
-            if self.proxima_chegada_2 == self.momento:
                 self.print_estado_sistema("Chegada")
+            if self.proxima_chegada_2 == self.momento:
                 self.escalona_chegada_fila_2()
                 if self.servidor_livre:
                     self.aloca_servidor()
                 else:
                     self.fila_2.append('2')
+                self.print_estado_sistema("Chegada")
 
 sim = Simulacao(10)
 sim.run()
