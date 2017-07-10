@@ -34,6 +34,7 @@ class Simulacao:
         print("Elementos na Fila 1: " + str(self.fila_1))
         print("Elementos na Fila 2: " + str(self.fila_2))
         print("Elemento no serviço: " + str(not self.servidor_livre))
+        print(("Término: " + str(self.termino)) if not self.servidor_livre else "")
         self.qtd_eventos = self.qtd_eventos - 1
 
     def run(self):
