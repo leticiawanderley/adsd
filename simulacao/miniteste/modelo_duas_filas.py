@@ -23,6 +23,10 @@ class Simulacao:
     def escalona_chegada_fila_2(self):
         self.proxima_chegada_2 = random.randint(1, 5) + self.momento
 
+    def aloca_servidor(self):
+        self.servidor_livre = False
+        self.termino = random.randint(3, 7) + self.momento
+
     def print_estado_sistema(self, tipo_evento):
         print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
         print("Tipo de evento: " + tipo_evento)
@@ -40,12 +44,10 @@ class Simulacao:
             if self.termino == self.momento:
                 self.print_estado_sistema("Saída")
                 if self.fila_1:
-                    self.servidor_livre = False
-                    self.termino = random.randint(3, 7) + self.momento
+                    self.aloca_servidor()
                     self.fila_1.pop()
                 elif self.fila_2:
-                    self.servidor_livre = False
-                    self.termino = random.randint(3, 7) + self.momento
+                    self.aloca_servidor()
                     self.fila_2.pop()
                 else:
                     self.servidor_livre = True
@@ -54,16 +56,14 @@ class Simulacao:
                 self.print_estado_sistema("Chegada")
                 self.escalona_chegada_fila_1()
                 if self.servidor_livre:
-                    self.servidor_livre = False
-                    self.termino = random.randint(3, 7) + self.momento
+                    self.aloca_servidor()
                 else:
                     self.fila_1.append('1')
             if self.proxima_chegada_2 == self.momento:
                 self.print_estado_sistema("Chegada")
                 self.escalona_chegada_fila_2()
                 if self.servidor_livre:
-                    self.servidor_livre = False
-                    self.termino = random.randint(3, 7) + self.momento
+                    self.aloca_servidor()
                 else:
                     self.fila_2.append('2')
 
