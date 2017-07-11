@@ -16,6 +16,7 @@ class Simulacao:
 
     def __init__(self, qtd_eventos):
         self.qtd_eventos = qtd_eventos
+        self.f = open('resultado', 'w')
 
     def escalona_chegada_fila_1(self):
         self.proxima_chegada_1 = random.randint(1, 10) + self.momento
@@ -28,13 +29,12 @@ class Simulacao:
         self.termino = random.randint(3, 7) + self.momento
 
     def print_estado_sistema(self, tipo_evento):
-        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-        print("Tipo de evento: " + tipo_evento)
-        print("Momento do evento: " + str(self.momento))
-        print("Elementos na Fila 1: " + str(self.fila_1))
-        print("Elementos na Fila 2: " + str(self.fila_2))
-        print("Elemento no serviço: " + str(not self.servidor_livre))
-        print(("Término: " + str(self.termino)) if not self.servidor_livre else "")
+        self.f.write("Tipo de evento: " + tipo_evento +
+        ", Momento do evento: " + str(self.momento) +
+        "\nElementos na Fila 1: " + str(self.fila_1) +
+        "\nElementos na Fila 2: " + str(self.fila_2) + "\nElemento no serviço: " +
+        (("Término em " + str(self.termino)) if not self.servidor_livre else "Nenhum"))
+        self.f.write("\n\n")
         self.qtd_eventos = self.qtd_eventos - 1
 
     def run(self):
@@ -68,5 +68,5 @@ class Simulacao:
                     self.fila_2.append('2')
                 self.print_estado_sistema("Chegada")
 
-sim = Simulacao(10)
+sim = Simulacao(500)
 sim.run()
