@@ -42,6 +42,7 @@ class Simulacao:
         self.escalona_chegada_fila_2()
         while(self.qtd_eventos > 0):
             self.momento = self.momento + 1
+            # Quando se atinge o momento de término de uso do servidor
             if self.termino == self.momento:
                 if self.fila_1:
                     self.aloca_servidor()
@@ -53,6 +54,7 @@ class Simulacao:
                     self.servidor_livre = True
                 self.print_estado_sistema("Saída")
 
+            # Quando se atinge o momento de chegada de um elemento na lista 1
             if self.proxima_chegada_1 == self.momento:
                 self.escalona_chegada_fila_1()
                 if self.servidor_livre:
@@ -60,6 +62,8 @@ class Simulacao:
                 else:
                     self.fila_1.append('1')
                 self.print_estado_sistema("Chegada")
+
+            # Quando se atinge o momento de chegada de um elemento na lista 2
             if self.proxima_chegada_2 == self.momento:
                 self.escalona_chegada_fila_2()
                 if self.servidor_livre:
